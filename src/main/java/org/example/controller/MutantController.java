@@ -79,7 +79,7 @@ public class MutantController {
         @ApiResponse(
             responseCode = "400",
             description = "Secuencia de ADN inválida",
-            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
+            content = @Content
         )
     })
     public ResponseEntity<Void> isMutant(@Valid @RequestBody DnaRequest request) {
