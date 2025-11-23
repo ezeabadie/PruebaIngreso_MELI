@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.springframework.stereotype.Component;
+import java.util.Set;
 
 /**
  * ========================================
@@ -15,10 +16,17 @@ import org.springframework.stereotype.Component;
  * - Las secuencias pueden estar en 4 direcciones: horizontal, vertical, diagonal ↘, diagonal ↗
  * - La matriz debe ser NxN con valores A, T, C, G
  *
- * OPTIMIZACIÓN:
- * - Early termination: Apenas encuentra 2 secuencias, retorna true
- * - Conversión a char[][]: Acceso más rápido que String.charAt()
- * - Complejidad: O(N²) en peor caso, O(N) en mejor caso
+ * OPTIMIZACIONES IMPLEMENTADAS:
+ * 1. Early termination: Apenas encuentra 2 secuencias, retorna true
+ * 2. Single pass: Un solo recorrido de la matriz
+ * 3. Boundary checking: Verifica límites antes de buscar
+ * 4. Direct comparison: Sin loops en métodos check
+ * 5. Validation Set O(1): Set inmutable para validación rápida
+ * 6. Conversión a char[][]: Acceso más rápido que String.charAt()
+ *
+ * COMPLEJIDAD:
+ * - Temporal: O(N²) en peor caso, O(N) en mejor caso
+ * - Espacial: O(N²) para char[][], O(1) adicional
  *
  * @author GitHub Copilot
  */
@@ -34,6 +42,12 @@ public class MutantDetector {
      * Número mínimo de secuencias para ser considerado mutante.
      */
     private static final int MIN_SEQUENCES_FOR_MUTANT = 2;
+
+    /**
+     * Set inmutable de bases válidas para validación O(1).
+     * Optimización #5: Validation Set O(1)
+     */
+    private static final Set<Character> VALID_BASES = Set.of('A', 'T', 'C', 'G');
 
     /**
      * Determina si un ADN corresponde a un mutante.
@@ -81,10 +95,10 @@ public class MutantDetector {
                 );
             }
 
-            // Validar que cada carácter sea A, T, C, o G
+            // Validar que cada carácter sea A, T, C, o G (Optimización #5: Set O(1))
             for (int j = 0; j < row.length(); j++) {
                 char c = row.charAt(j);
-                if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
+                if (!VALID_BASES.contains(c)) {
                     throw new IllegalArgumentException(
                         "Carácter inválido '" + c + "' en posición [" + i + "][" + j + "]. " +
                         "Solo se permiten: A, T, C, G"
