@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id 'jacoco'
+    id 'org.springframework.boot' version '3.2.3'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'org.example'
@@ -53,8 +56,8 @@ jacocoTestReport {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     '**/MutantDetectorApplication.class',
-                    '**/config/**',
-                    '**/*$*' // Excluir clases internas generadas por Lombok
+                    '*/config/*',
+                    '*/$*' // Excluir clases internas generadas por Lombok
             ])
         }))
     }
