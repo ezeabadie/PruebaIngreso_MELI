@@ -1,17 +1,34 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * ========================================
+ * APLICACIÓN PRINCIPAL
+ * ========================================
+ *
+ * Sistema de Detección de Mutantes - Examen MercadoLibre
+ *
+ * Endpoints disponibles:
+ * - POST http://localhost:8080/mutant
+ * - GET  http://localhost:8080/stats
+ * - Swagger UI: http://localhost:8080/swagger-ui.html
+ * - H2 Console: http://localhost:8080/h2-console
+ *
+ * @author GitHub Copilot
+ */
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        SpringApplication.run(Main.class, args);
+        System.out.println("\n" +
+                "========================================\n" +
+                "🧬 Mutant Detection API - ONLINE\n" +
+                "========================================\n" +
+                "Swagger UI: http://localhost:8080/swagger-ui.html\n" +
+                "H2 Console: http://localhost:8080/h2-console\n" +
+                "========================================\n");
     }
 }
+

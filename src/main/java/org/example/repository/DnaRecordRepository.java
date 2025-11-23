@@ -1,0 +1,41 @@
+package org.example.repository;
+
+import org.example.entity.DnaRecord;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+/**
+ * Repositorio para operaciones de base de datos con DnaRecord.
+ */
+@Repository
+public interface DnaRecordRepository extends JpaRepository<DnaRecord, Long> {
+
+    /**
+     * Busca un registro por su hash SHA-256.
+     * Útil para evitar procesar el mismo ADN dos veces.
+     *
+     * @param dnaHash Hash SHA-256 de la secuencia de ADN
+     * @return Optional con el registro si existe
+     */
+    Optional<DnaRecord> findByDnaHash(String dnaHash);
+
+    /**
+     * Cuenta cuántos ADN mutantes hay registrados.
+     *
+     * @return Cantidad de registros donde isMutant = true
+     */
+    @Query("SELECT COUNT(d) FROM DnaRecord d WHERE d.isMutant = true")
+    long countMutants();
+
+    /**
+     * Cuenta cuántos ADN humanos (mutantes + no mutantes) hay registrados.
+     *
+     * @return Cantidad total de registros
+     */
+    @Query("SELECT COUNT(d) FROM DnaRecord d")
+    long countHumans();
+}
+
