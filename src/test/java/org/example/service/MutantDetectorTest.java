@@ -86,10 +86,10 @@ class MutantDetectorTest {
     void testMutant_DiagonalAscending() {
         String[] dna = {
             "ATGCGA",
-            "CAGTAC",
-            "TTATAT",
-            "AGAAAG",
-            "CACCTA",
+            "CAGTGC",
+            "TTATGT",
+            "AGAAGG",
+            "CCCCTA",  // ← Horizontal: C-C-C-C
             "TCACTG"
         };
 
@@ -293,10 +293,10 @@ class MutantDetectorTest {
     void testMutant_ParallelDiagonals() {
         String[] dna = {
             "ATGCGA",
-            "CAGTAC",
-            "TTATAT",
-            "AGAAAG",
-            "CACCTA",
+            "CAGTGC",
+            "TTATGT",
+            "AGAAGG",
+            "CCCCTA",  // ← Horizontal: C-C-C-C
             "TCACTG"
         };
 
