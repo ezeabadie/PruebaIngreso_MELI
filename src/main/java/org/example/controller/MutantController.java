@@ -112,7 +112,7 @@ public class MutantController {
      *
      * @return ResponseEntity con las estadísticas
      */
-    @GetMapping("/stats")
+    @GetMapping(value = "/stats", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
         summary = "Obtiene estadísticas de verificaciones",
         description = "Retorna la cantidad de ADN mutantes detectados, el total de verificaciones realizadas " +
@@ -122,7 +122,10 @@ public class MutantController {
         @ApiResponse(
             responseCode = "200",
             description = "Estadísticas obtenidas exitosamente",
-            content = @Content(schema = @Schema(implementation = StatsResponse.class))
+            content = @Content(
+                mediaType = MediaType.APPLICATION_JSON_VALUE,
+                schema = @Schema(implementation = StatsResponse.class)
+            )
         )
     })
     public ResponseEntity<StatsResponse> getStats() {
