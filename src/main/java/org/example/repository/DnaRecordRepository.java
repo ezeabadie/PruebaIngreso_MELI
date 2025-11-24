@@ -23,7 +23,18 @@ public interface DnaRecordRepository extends JpaRepository<DnaRecord, Long> {
     Optional<DnaRecord> findByDnaHash(String dnaHash);
 
     /**
+     * Cuenta registros según si son mutantes o no.
+     * Query method derivado - Spring Data JPA genera automáticamente:
+     * SELECT COUNT(*) FROM dna_records WHERE is_mutant = ?
+     *
+     * @param isMutant true para contar mutantes, false para contar humanos
+     * @return Cantidad de registros con el valor isMutant especificado
+     */
+    long countByIsMutant(boolean isMutant);
+
+    /**
      * Cuenta cuántos ADN mutantes hay registrados.
+     * Método alternativo usando @Query explícita.
      *
      * @return Cantidad de registros donde isMutant = true
      */
@@ -32,6 +43,7 @@ public interface DnaRecordRepository extends JpaRepository<DnaRecord, Long> {
 
     /**
      * Cuenta cuántos ADN humanos (mutantes + no mutantes) hay registrados.
+     * Método alternativo usando @Query explícita.
      *
      * @return Cantidad total de registros
      */
