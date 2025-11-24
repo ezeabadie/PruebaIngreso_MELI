@@ -1,5 +1,6 @@
 package org.example.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,16 +17,25 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Estadísticas de verificaciones de ADN realizadas")
 public class StatsResponse {
 
     /**
      * Cantidad de ADN mutantes detectados.
      */
+    @Schema(
+        description = "Cantidad de ADN mutantes detectados",
+        example = "40"
+    )
     private long countMutantDna;
 
     /**
      * Cantidad total de ADN humanos (mutantes + no mutantes).
      */
+    @Schema(
+        description = "Cantidad total de humanos verificados (mutantes + no mutantes)",
+        example = "100"
+    )
     private long countHumanDna;
 
     /**
@@ -33,6 +43,10 @@ public class StatsResponse {
      * Formula: countMutantDna / countHumanDna
      * Si no hay humanos verificados, retorna 0.0
      */
+    @Schema(
+        description = "Proporción de mutantes sobre el total (count_mutant_dna / count_human_dna)",
+        example = "0.4"
+    )
     private double ratio;
 
     /**
