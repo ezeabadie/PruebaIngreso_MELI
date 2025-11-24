@@ -1,6 +1,7 @@
 package org.example.dto;
 
 import org.example.validation.ValidDnaSequence;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,11 +25,13 @@ public class DnaRequest {
      *
      * Validaciones:
      * - No puede ser null
+     * - No puede estar vacío
      * - Debe ser una matriz cuadrada (NxN)
      * - Solo puede contener A, T, C, G
      * - Tamaño mínimo 4x4
      */
     @NotNull(message = "La secuencia de ADN no puede ser nula")
+    @NotEmpty(message = "La secuencia de ADN no puede estar vacía")
     @ValidDnaSequence
     private String[] dna;
 }
