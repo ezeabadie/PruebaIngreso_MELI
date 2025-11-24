@@ -129,8 +129,8 @@ public class MutantDetector {
                 if (col <= n - SEQUENCE_LENGTH) {
                     if (checkHorizontal(matrix, row, col)) {
                         sequenceCount++;
-                        if (sequenceCount >= MIN_SEQUENCES_FOR_MUTANT) {
-                            return true;  // ← EARLY TERMINATION
+                        if (sequenceCount > 1) {  // ← EARLY TERMINATION OPTIMIZADO
+                            return true;
                         }
                     }
                 }
@@ -141,8 +141,8 @@ public class MutantDetector {
                 if (row <= n - SEQUENCE_LENGTH) {
                     if (checkVertical(matrix, row, col)) {
                         sequenceCount++;
-                        if (sequenceCount >= MIN_SEQUENCES_FOR_MUTANT) {
-                            return true;  // ← EARLY TERMINATION
+                        if (sequenceCount > 1) {  // ← EARLY TERMINATION OPTIMIZADO
+                            return true;
                         }
                     }
                 }
@@ -153,8 +153,8 @@ public class MutantDetector {
                 if (row <= n - SEQUENCE_LENGTH && col <= n - SEQUENCE_LENGTH) {
                     if (checkDiagonalDescending(matrix, row, col)) {
                         sequenceCount++;
-                        if (sequenceCount >= MIN_SEQUENCES_FOR_MUTANT) {
-                            return true;  // ← EARLY TERMINATION
+                        if (sequenceCount > 1) {  // ← EARLY TERMINATION OPTIMIZADO
+                            return true;
                         }
                     }
                 }
@@ -165,8 +165,8 @@ public class MutantDetector {
                 if (row >= SEQUENCE_LENGTH - 1 && col <= n - SEQUENCE_LENGTH) {
                     if (checkDiagonalAscending(matrix, row, col)) {
                         sequenceCount++;
-                        if (sequenceCount >= MIN_SEQUENCES_FOR_MUTANT) {
-                            return true;  // ← EARLY TERMINATION
+                        if (sequenceCount > 1) {  // ← EARLY TERMINATION OPTIMIZADO
+                            return true;
                         }
                     }
                 }

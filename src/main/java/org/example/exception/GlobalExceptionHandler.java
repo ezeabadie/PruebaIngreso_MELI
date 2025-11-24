@@ -47,6 +47,26 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Maneja errores de validación de ADN (IllegalArgumentException).
+     * Se dispara cuando el ADN no cumple con los requisitos (NxN, solo ATCG, etc.).
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(
+            IllegalArgumentException ex,
+            WebRequest request) {
+
+        ErrorResponse error = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Invalid DNA",
+                ex.getMessage(),
+                request.getDescription(false).replace("uri=", "")
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
      * Maneja errores en el cálculo del hash de ADN.
      */
     @ExceptionHandler(DnaHashCalculationException.class)

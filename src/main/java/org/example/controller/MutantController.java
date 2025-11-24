@@ -59,7 +59,7 @@ public class MutantController {
      * @param request DTO con la secuencia de ADN
      * @return ResponseEntity vacío con código de estado correspondiente
      */
-    @PostMapping("/mutant")
+    @PostMapping(value = "/mutant", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
         summary = "Verifica si un ADN es mutante",
         description = "Recibe una secuencia de ADN en formato de matriz NxN y determina si corresponde a un mutante. " +

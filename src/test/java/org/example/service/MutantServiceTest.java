@@ -127,16 +127,18 @@ class MutantServiceTest {
     @Test
     @DisplayName("isMutant debe propagar IllegalArgumentException del detector")
     void testIsMutant_ShouldPropagateException_FromDetector() {
-        // Arrange
-        String[] invalidDna = null;
+        // Arrange: usar DNA inválido (matriz no cuadrada)
+        String[] invalidDna = {"ATGC", "CAG"}; // 4x2 no es válido
+
         when(mutantDetector.isMutant(invalidDna))
-            .thenThrow(new IllegalArgumentException("ADN inválido"));
+            .thenThrow(new IllegalArgumentException("La matriz debe ser NxN"));
 
         // Act & Assert
         assertThrows(IllegalArgumentException.class, () -> {
             mutantService.isMutant(invalidDna);
         });
 
+        verify(mutantDetector).isMutant(invalidDna);
         verify(repository, never()).save(any());
     }
 }
