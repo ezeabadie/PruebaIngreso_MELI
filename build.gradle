@@ -55,9 +55,11 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    '**/MutantDetectorApplication.class',
-                    '*/config/*',
-                    '*/$*' // Excluir clases internas generadas por Lombok
+                '**/Main.class',              // Excluir clase principal
+                '**/config/**',               // Excluir configuraciones
+                '**/dto/**',                  // Excluir DTOs (generados por Lombok)
+                '**/entity/**',               // Excluir Entities (generados por Lombok)
+                '**/*$*'                      // Excluir clases internas de Lombok
             ])
         }))
     }
@@ -67,7 +69,14 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.80
+                minimum = 0.70  // Mínimo 70% (aceptable según consigna)
+            }
+        }
+        rule {
+            element = 'CLASS'
+            includes = ['org.example.service.*']
+            limit {
+                minimum = 0.85  // Service layer mínimo 85%
             }
         }
     }
